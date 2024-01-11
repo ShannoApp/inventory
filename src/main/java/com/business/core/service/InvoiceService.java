@@ -1,6 +1,8 @@
 package com.business.core.service;
 
+import com.business.core.domain.Customer;
 import com.business.core.domain.Invoice;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -55,4 +57,6 @@ public interface InvoiceService {
      * @param id the id of the entity.
      */
     void delete(String id);
+
+    Optional<List<Invoice>> findByCustomerOrderByIssueDateDesc(Customer customer, String businessId);
 }

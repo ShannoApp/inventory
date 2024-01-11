@@ -1,6 +1,7 @@
 package com.business.core.service.impl;
 
 import com.business.core.domain.BillingItem;
+import com.business.core.domain.Customer;
 import com.business.core.domain.Dashboard;
 import com.business.core.domain.Invoice;
 import com.business.core.domain.Product;
@@ -120,5 +121,11 @@ public class InvoiceServiceImpl implements InvoiceService {
     public void delete(String id) {
         log.debug("Request to delete Invoice : {}", id);
         invoiceRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<List<Invoice>> findByCustomerOrderByIssueDateDesc(Customer customer, String businessId) {
+        log.debug("Request to get all Invoices By Customer");
+        return invoiceRepository.findByCustomerIdAndBusinessId(customer, businessId);
     }
 }

@@ -1,64 +1,196 @@
-<div class="d-flex justify-content-center">
-  <div class="col-8">
+<!-- app.component.html -->
+
+<div style="margin-top: 13%; margin-left: 35%" *ngIf="isLoading">
+  <div class="spinner-grow text-primary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-success" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-danger" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-warning" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-info" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-light" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="spinner-grow text-dark" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="!isLoading">
+  <div class="col-12">
     <div *ngIf="customer">
-      <h2 data-cy="customerDetailsHeading">
-        <span jhiTranslate="latestBusinessApp.customer.detail.title">Customer Details</span>
-      </h2>
-
-      <hr />
-
-      <jhi-alert-error></jhi-alert-error>
-
-      <jhi-alert></jhi-alert>
-
-      <dl class="row-md jh-entity-details">
-        <!-- <dt><span jhiTranslate="global.field.id">id</span></dt>
-        <dd>
-          <span>{{ customer.id }}</span>
-        </dd> -->
-        <dt>
-          <span jhiTranslate="latestBusinessApp.customer.firstName">FirstName</span>
-        </dt>
-        <dd>
-          <span>{{ customer.firstName }}</span>
-        </dd>
-        <dt>
-          <span jhiTranslate="latestBusinessApp.customer.lastName">LastName</span>
-        </dt>
-        <dd>
-          <span>{{ customer.lastName }}</span>
-        </dd>
-        <dt><span jhiTranslate="latestBusinessApp.customer.email">Email</span></dt>
-        <dd>
-          <span>{{ customer.email }}</span>
-        </dd>
-        <dt><span jhiTranslate="latestBusinessApp.customer.phone">Phone</span></dt>
-        <dd>
-          <span>{{ customer.phone }}</span>
-        </dd>
-        <dt>
-          <span jhiTranslate="latestBusinessApp.customer.address">Address</span>
-        </dt>
-        <dd>
-          <span>{{ customer.address }}</span>
-        </dd>
-        <!-- <dt>
-          <span jhiTranslate="latestBusinessApp.customer.business">Business</span>
-        </dt> -->
-        <!-- <dd>
-          <div *ngIf="customer.business">
-            <a [routerLink]="['/business', customer.business.id, 'view']">{{ customer.business.id }}</a>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h2 data-cy="customerDetailsHeading">{{ customer?.firstName + ' ' + customer?.lastName }}</h2>
           </div>
-        </dd> -->
-      </dl>
+          <div>
+            <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+              <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"></span>
+            </button>
+            <button type="button" [routerLink]="['/customer', customer?.id, 'edit']" class="btn btn-primary">
+              <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+          </div>
+        </div>
 
-      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
-        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
-      </button>
+        <jhi-alert-error></jhi-alert-error>
+        <jhi-alert></jhi-alert>
 
-      <button type="button" [routerLink]="['/customer', customer.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
-      </button>
+        <div class="col-sm-6 border border-success mb-2">
+          <div class="team-single-text padding-50px-left sm-no-padding-left">
+            <div class="contact-info-section margin-40px-tb">
+              <ul class="list-style9 no-margin">
+                <li>
+                  <div class="row">
+                    <div class="col-md-5 col-5">
+                      <i class="fas fa-map-marker-alt text-green"></i>
+                      <strong class="margin-10px-left text-green">Address:</strong>
+                    </div>
+                    <div class="col-md-7 col-7">
+                      <p>{{ customer?.address }}</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-md-5 col-5">
+                      <i class="fas fa-mobile-alt text-purple"></i>
+                      <strong class="margin-10px-left xs-margin-four-left text-purple">Phone:</strong>
+                    </div>
+                    <div class="col-md-7 col-7">
+                      <p>{{ customer?.phone }}</p>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="row">
+                    <div class="col-md-5 col-5">
+                      <i class="fas fa-envelope text-pink"></i>
+                      <strong class="margin-10px-left xs-margin-four-left text-pink">Email:</strong>
+                    </div>
+                    <div class="col-md-7 col-7">
+                      <p>
+                        <a href="javascript:void(0)">{{ customer?.email }}</a>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 col-xl-6">
+                <div class="card bg-c-blue order-card">
+                  <div class="card-block">
+                    <h6 class="m-b-20">Pending Amount</h6>
+                    <h2 class="text-right">
+                      <i class="fa fa-cart-plus f-left"></i><span>{{ balances?.pendingAmount }}</span>
+                    </h2>
+                    <p class="m-b-0">From {{ balances?.pendingInvoices }} Invoices</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-xl-6">
+                <div class="card bg-c-green order-card">
+                  <div class="card-block">
+                    <h6 class="m-b-20">Paid Amount</h6>
+                    <h2 class="text-right">
+                      <i class="fa fa-rocket f-left"></i><span>{{ balances?.paidAmount }}</span>
+                    </h2>
+                    <p class="m-b-0">From {{ balances?.paidInvoices }} Invoices</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-responsive table-entities" id="entities" *ngIf="invoices && invoices!.length > 0">
+          <div class="table-header">
+            <label>Invoices</label>
+          </div>
+          <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+              <tr>
+                <th scope="col" jhiSortBy="invoiceNumber">
+                  <div class="d-flex">
+                    <span jhiTranslate="latestBusinessApp.invoice.invoiceNumber">Invoice Number</span>
+                    <fa-icon class="p-1" icon="sort"></fa-icon>
+                  </div>
+                </th>
+                <th scope="col" jhiSortBy="issueDate">
+                  <div class="d-flex">
+                    <span jhiTranslate="latestBusinessApp.invoice.issueDate">Issue Date</span>
+                    <fa-icon class="p-1" icon="sort"></fa-icon>
+                  </div>
+                </th>
+                <th scope="col" jhiSortBy="dueDate">
+                  <div class="d-flex">
+                    <span jhiTranslate="latestBusinessApp.invoice.dueDate">Due Date</span>
+                    <fa-icon class="p-1" icon="sort"></fa-icon>
+                  </div>
+                </th>
+                <th scope="col" jhiSortBy="totalAmount">
+                  <div class="d-flex">
+                    <span jhiTranslate="latestBusinessApp.invoice.totalAmount">Total Amount</span>
+                    <fa-icon class="p-1" icon="sort"></fa-icon>
+                  </div>
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody infinite-scroll>
+              <tr *ngFor="let invoice of invoices" data-cy="entityTable">
+                <td>
+                  <a [routerLink]="['/invoice', invoice.id, 'view']">{{ invoice.invoiceNumber }}</a>
+                </td>
+                <td>{{ invoice.issueDate | formatMediumDate }}</td>
+                <td>{{ invoice.dueDate | formatMediumDate }}</td>
+                <td>{{ invoice.totalAmount }}</td>
+                <td class="text-end">
+                  <div class="btn-group">
+                    <button
+                      type="submit"
+                      [routerLink]="['/invoice', invoice.id, 'view']"
+                      class="btn btn-info btn-sm"
+                      data-cy="entityDetailsButton"
+                    >
+                      <fa-icon icon="eye"></fa-icon>
+                      <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                    </button>
+                    <button
+                      type="submit"
+                      [routerLink]="['/invoice', invoice.id, 'edit']"
+                      class="btn btn-primary btn-sm"
+                      data-cy="entityEditButton"
+                      [disabled]="true"
+                    >
+                      <fa-icon icon="pencil-alt"></fa-icon>
+                      <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

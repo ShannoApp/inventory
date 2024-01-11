@@ -118,6 +118,30 @@ export class InvoiceService {
     }
   }
 
+  findInvoiceByCustomer(customerId: string): Observable<EntityArrayResponseType> {
+    const businessId = this.business?.id;
+
+    if (businessId) {
+      const resourceUrlForQuery = this.applicationConfigService.getEndpointFor(`api/${businessId}/invoices/${customerId}`);
+      return this.http.get<IInvoice[]>(resourceUrlForQuery, { observe: 'response' });
+    } else {
+      return this.businessService.query().pipe(
+        switchMap(res => {
+          const defaultBusiness = res.body?.find(business => business.deflaut);
+          const businessIdFromQuery = defaultBusiness?.id;
+
+          if (businessIdFromQuery) {
+            const resourceUrlForQuery = this.applicationConfigService.getEndpointFor(`api/${businessIdFromQuery}/invoices/${customerId}`);
+            return this.http.get<IInvoice[]>(resourceUrlForQuery, { observe: 'response' });
+          } else {
+            // Handle the case where there are no businesses or the default business doesn't have an ID
+            return throwError('No business ID found');
+          }
+        }),
+      );
+    }
+  }
+
   private getInvoicesByBusinessId(businessId: string, options: any): Observable<EntityArrayResponseType> {
     const resourceUrlForQuery = this.applicationConfigService.getEndpointFor(`api/${businessId}/invoices`);
     return this.http.get<IInvoice[]>(resourceUrlForQuery, { params: options, observe: 'response' });
@@ -181,5 +205,29 @@ export class InvoiceService {
     return res.clone({
       body: res.body ? res.body.map(item => this.convertDateFromServer(item)) : null,
     });
+  }
+
+  calculatePendingAndPaidAmount(invoices: IInvoice[]): {
+    pendingAmount: number;
+    paidAmount: number;
+    pendingInvoices: number;
+    paidInvoices: number;
+  } {
+    let pendingAmount = 0;
+    let paidAmount = 0;
+    let pendingInvoices = 0;
+    let paidInvoices = 0;
+
+    invoices.forEach(invoice => {
+      if (invoice.paid) {
+        paidAmount = paidAmount + invoice?.totalAmount! ?? 0;
+        paidInvoices++;
+      } else {
+        pendingAmount = pendingAmount + invoice?.totalAmount! ?? 0;
+        pendingInvoices++;
+      }
+    });
+
+    return { pendingAmount, paidAmount, pendingInvoices, paidInvoices };
   }
 }

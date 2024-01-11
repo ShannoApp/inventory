@@ -1,5 +1,6 @@
 package com.business.core.web.rest;
 
+import com.business.core.domain.Customer;
 import com.business.core.domain.Invoice;
 import com.business.core.repository.InvoiceRepository;
 import com.business.core.service.InvoiceService;
@@ -152,6 +153,17 @@ public class InvoiceResource {
         Page<Invoice> page = invoiceService.findAll(pageable, businessId);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
+
+    @GetMapping("{businessId}/invoices/{customerId}")
+    public ResponseEntity<List<Invoice>> getAllInvoicesByCustomer(@PathVariable String businessId, @PathVariable String customerId) {
+        log.debug("REST request to get a page of Invoices");
+        Customer cus = new Customer().id(customerId);
+        Optional<List<Invoice>> invoices = invoiceService.findByCustomerOrderByIssueDateDesc(cus, businessId);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, ""))
+            .body(invoices.get());
     }
 
     /**
