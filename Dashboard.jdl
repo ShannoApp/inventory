@@ -1,0 +1,10 @@
+entity Dashboard {
+  totalSaleTillDate Double 
+  totalProfitTillDate Double
+}
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

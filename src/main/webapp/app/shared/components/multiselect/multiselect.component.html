@@ -1,0 +1,72 @@
+<form *ngIf="items" name="deleteForm" (ngSubmit)="save('')">
+  <div class="modal-header">
+    <h4 class="modal-title" data-cy="customerDeleteDialogHeading" jhiTranslate="entity.delete.title">Select {{ dialogName }}</h4>
+
+    <button type="button" class="btn-close" data-dismiss="modal" aria-hidden="true" (click)="cancel()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <div class="row">
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header">
+            <div class="input-group mb-3" *ngIf="!selectOne">
+              Category
+              <div class="input-group-append">
+                <select
+                  style="width: 137%"
+                  [(ngModel)]="selectedCategory"
+                  (change)="selectCategory()"
+                  class="form-select"
+                  [ngModelOptions]="{ standalone: true }"
+                >
+                  <option selected [ngValue]="'All'">All</option>
+                  <option selected *ngFor="let category of categories" [ngValue]="category.name">{{ category.name }}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Search" (change)="searchItems($event)" />
+            </div>
+          </div>
+          <div class="card m-1">
+            <!-- <div class="card-header">
+              <h6>{{ item.name }}</h6>
+            </div>
+            <span *ngIf="item.obj?.sellingPrice">
+            price : {{item.obj?.sellingPrice}}
+            </span>
+          </div> -->
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of items; let i = index" (click)="selectItem(i, item)">{{ item.name }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header">Selected</div>
+          <div class="card m-1">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngFor="let item of selectedItems; let i = index">
+                {{ item.name }} <button type="button" style="float: right" class="btn-close" (click)="removeSelectedItem(i, item)"></button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()">
+      <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+    </button>
+
+    <button id="jhi-confirm-delete-customer" data-cy="entityConfirmDeleteButton" type="submit" class="btn btn-primary">
+      <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+    </button>
+  </div>
+</form>

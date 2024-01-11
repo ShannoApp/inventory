@@ -1,0 +1,22 @@
+<jhi-page-ribbon></jhi-page-ribbon>
+
+<div>
+  <router-outlet name="navbar"></router-outlet>
+</div>
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <!-- <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark" *ngIf="account != null">
+      <router-outlet name="sidebar"></router-outlet>
+    </div> -->
+    <div class="col py-3 expand">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+<!-- <div class="container-fluid">
+  <div class="card jh-card">
+    <router-outlet></router-outlet>
+  </div>
+
+  <jhi-footer></jhi-footer>
+</div> -->

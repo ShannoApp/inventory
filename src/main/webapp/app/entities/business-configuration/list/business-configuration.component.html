@@ -1,0 +1,127 @@
+<div>
+  <h2 id="page-heading" data-cy="BusinessConfigurationHeading">
+    <span jhiTranslate="latestBusinessApp.businessConfiguration.home.title"
+      >__jhiTransformTranslate__('latestBusinessApp.businessConfiguration.home.title')</span
+    >
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="latestBusinessApp.businessConfiguration.home.refreshListLabel"
+          >__jhiTransformTranslate__('latestBusinessApp.businessConfiguration.home.refreshListLabel')</span
+        >
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-business-configuration"
+        [routerLink]="['/business-configuration/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="latestBusinessApp.businessConfiguration.home.createLabel"
+          >__jhiTransformTranslate__('latestBusinessApp.businessConfiguration.home.createLabel')</span
+        >
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="businessConfigurations?.length === 0">
+    <span jhiTranslate="latestBusinessApp.businessConfiguration.home.notFound"
+      >__jhiTransformTranslate__('latestBusinessApp.businessConfiguration.home.notFound')</span
+    >
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="businessConfigurations && businessConfigurations.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">__jhiTransformTranslate__('global.field.id')</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="businessId">
+            <div class="d-flex">
+              <span jhiTranslate="latestBusinessApp.businessConfiguration.businessId"
+                >__jhiTransformTranslate__('latestBusinessApp.businessConfiguration.businessId')</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="discount">
+            <div class="d-flex">
+              <span jhiTranslate="latestBusinessApp.businessConfiguration.discount"
+                >__jhiTransformTranslate__('latestBusinessApp.businessConfiguration.discount')</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="shippingCharges">
+            <div class="d-flex">
+              <span jhiTranslate="latestBusinessApp.businessConfiguration.shippingCharges"
+                >__jhiTransformTranslate__('latestBusinessApp.businessConfiguration.shippingCharges')</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tax">
+            <div class="d-flex">
+              <span jhiTranslate="latestBusinessApp.businessConfiguration.tax"
+                >__jhiTransformTranslate__('latestBusinessApp.businessConfiguration.tax')</span
+              >
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let businessConfiguration of businessConfigurations; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/business-configuration', businessConfiguration.id, 'view']">{{ businessConfiguration.id }}</a>
+          </td>
+          <td>{{ businessConfiguration.businessId }}</td>
+          <td>{{ businessConfiguration.discount }}</td>
+          <td>{{ businessConfiguration.shippingCharges }}</td>
+          <td>{{ businessConfiguration.tax }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/business-configuration', businessConfiguration.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">__jhiTransformTranslate__('entity.action.view')</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/business-configuration', businessConfiguration.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">__jhiTransformTranslate__('entity.action.edit')</span>
+              </button>
+
+              <button type="submit" (click)="delete(businessConfiguration)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete"
+                  >__jhiTransformTranslate__('entity.action.delete')</span
+                >
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

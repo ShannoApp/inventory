@@ -1,0 +1,73 @@
+<div class="sidebar">
+  <a class="sidebar-brand" href="#">
+    <ul class="list-unstyled">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ deflautBusiness?.name }}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li *ngFor="let business of businessList">
+            <a class="dropdown-item text-black" (click)="changeSelection(business)">{{ business.name }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </a>
+
+  <ul class="nav flex-column" id="menu">
+    <li class="nav-item">
+      <a routerLink="/" class="nav-link">
+        <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+        <span class="ms-1 d-sm-inline">Dashboard</span>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/invoice" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+        <span class="ms-1 d-sm-inline">Invoice</span>
+      </a>
+    </li>
+
+    <li>
+      <a
+        data-bs-toggle="collapse"
+        class="nav-link"
+        routerLink="/product"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+        <span class="ms-1 d-sm-inline">Products</span>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/customer" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+        <span class="ms-1 d-sm-inline">Customers</span>
+      </a>
+    </li>
+
+    <li>
+      <a routerLink="/category" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+        <span class="ms-1 d-sm-inline">Category</span>
+      </a>
+    </li>
+
+    <li>
+      <a
+        class="nav-link"
+        [routerLink]="['/business', deflautBusiness?.id, 'view']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+        <span class="ms-1 d-sm-inline">Setting</span>
+      </a>
+    </li>
+  </ul>
+
+  <hr />
+</div>

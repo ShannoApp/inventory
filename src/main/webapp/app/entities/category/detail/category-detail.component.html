@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="category">
+      <h2 data-cy="categoryDetailsHeading">
+        <span jhiTranslate="latestBusinessApp.category.detail.title">Category Details</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!-- <dt><span jhiTranslate="global.field.id">__jhiTransformTranslate__('global.field.id')</span></dt>
+        <dd>
+          <span>{{ category.id }}</span>
+        </dd> -->
+        <dt><span jhiTranslate="latestBusinessApp.category.name">Name</span></dt>
+        <dd>
+          <span>{{ category.name }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.category.description">Description</span>
+        </dt>
+        <dd>
+          <span>{{ category.description }}</span>
+        </dd>
+        <!-- <dt>  
+          <span jhiTranslate="latestBusinessApp.category.business">__jhiTransformTranslate__('latestBusinessApp.category.business')</span>
+        </dt>
+        <dd>
+          <div *ngIf="category.business">
+            <a [routerLink]="['/business', category.business.id, 'view']">{{ category.business.id }}</a>
+          </div>
+        </dd> -->
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/category', category.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

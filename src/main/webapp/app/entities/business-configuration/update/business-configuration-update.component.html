@@ -1,0 +1,91 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-business-configuration-heading"
+        data-cy="BusinessConfigurationCreateUpdateHeading"
+        jhiTranslate="latestBusinessApp.businessConfiguration.home.createOrEditLabel"
+      >
+        Invoice Setting
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <!-- <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="latestBusinessApp.businessConfiguration.businessId" for="field_businessId"
+            >Business Id</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="businessId"
+            id="field_businessId"
+            data-cy="businessId"
+            formControlName="businessId"
+          />
+          <div *ngIf="editForm.get('businessId')!.invalid && (editForm.get('businessId')!.dirty || editForm.get('businessId')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('businessId')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+              >__jhiTransformTranslate__('entity.validation.required')</small
+            >
+          </div>
+        </div> -->
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="latestBusinessApp.businessConfiguration.discount" for="field_discount">Discount</label>
+          <input type="number" class="form-control" name="discount" id="field_discount" data-cy="discount" formControlName="discount" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="latestBusinessApp.businessConfiguration.shippingCharges" for="field_shippingCharges"
+            >Shipping Charges</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="shippingCharges"
+            id="field_shippingCharges"
+            data-cy="shippingCharges"
+            formControlName="shippingCharges"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="latestBusinessApp.businessConfiguration.tax" for="field_tax">Tax</label>
+          <input type="number" class="form-control" name="tax" id="field_tax" data-cy="tax" formControlName="tax" />
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="button"
+          id="cancel-save"
+          data-cy="entityCreateCancelButton"
+          class="btn btn-secondary"
+          [disabled]="editForm.controls.id.value === null"
+          (click)="previousState()"
+        >
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

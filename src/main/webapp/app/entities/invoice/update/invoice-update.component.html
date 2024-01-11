@@ -1,0 +1,328 @@
+<div class="container" id="invoice-detail">
+  <div class="row gutters">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="card">
+          <div class="card-body p-0">
+            <div class="invoice-container">
+              <div class="invoice-header">
+                <!-- Row start -->
+                <!-- <div class="row gutters">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                  <div class="custom-actions-btns mb-5">
+                    <a class="btn btn-primary"> <i class="icon-download"></i> Download </a>
+                    <a href="#" class="btn btn-secondary"> <i class="icon-printer"></i> Print </a>
+                  </div>
+                </div>
+              </div> -->
+                <!-- Row end -->
+                <!-- Row start -->
+                <div class="row gutters">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                    <h3>{{ business?.name }}</h3>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                    <address style="float: right">
+                      {{ business?.website }}<br />
+                      {{ business?.email }}<br />
+                      {{ business?.phone }}<br />
+                    </address>
+                  </div>
+                </div>
+                <!-- Row end -->
+                <!-- Row start -->
+                <div class="row gutters">
+                  <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+                    <div class="invoice-details">
+                      <button type="button" class="btn btn-warning mb-3" (click)="addCustomer()" *ngIf="!selectedCustomer">
+                        Add Customer
+                      </button>
+                      <button type="button" class="btn btn-warning mb-3" (click)="addCustomer()" *ngIf="selectedCustomer">
+                        Edit Customer
+                      </button>
+                      <!-- <jhi-multiselect></jhi-multiselect> -->
+                      <address *ngIf="selectedCustomer != null">
+                        {{ selectedCustomer?.firstName + ' ' + selectedCustomer?.lastName }}<br />
+                        <div>
+                          <!-- <label class="form-label" jhiTranslate="latestBusinessApp.invoice.customer" for="field_customer">customer</label>
+                        <select
+                          class="form-control"
+                          id="field_customer"
+                          data-cy="customer"
+                          name="customer"
+                          formControlName="customer"
+                          [compareWith]="compareCustomer"
+                        >
+                          <option [ngValue]="null"></option>
+                          <option [ngValue]="customerOption" *ngFor="let customerOption of customersCollection">
+                            {{ customerOption.id }}
+                          </option>
+                        </select> -->
+                        </div>
+                      </address>
+                    </div>
+                    <!-- <button type="button" class="btn btn-primary" (click)="addItem()">Add Items</button> -->
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                    <div class="invoice-details">
+                      <div class="invoice-num">
+                        <div>Invoice - #{{ editForm.get('invoiceNumber')?.getRawValue() }}</div>
+                        <div>
+                          <label class="form-label" jhiTranslate="latestBusinessApp.invoice.issueDate" for="field_issueDate"
+                            >Issue Date</label
+                          >
+                          <div class="input-group">
+                            <input
+                              id="field_issueDate"
+                              data-cy="issueDate"
+                              type="text"
+                              class="form-control"
+                              name="issueDate"
+                              ngbDatepicker
+                              #issueDateDp="ngbDatepicker"
+                              formControlName="issueDate"
+                            />
+                            <button type="button" class="btn btn-secondary" (click)="issueDateDp.toggle()">
+                              <fa-icon icon="calendar-alt"></fa-icon>
+                            </button>
+                          </div>
+                          <div
+                            *ngIf="
+                              editForm.get('issueDate')!.invalid && (editForm.get('issueDate')!.dirty || editForm.get('issueDate')!.touched)
+                            "
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="editForm.get('issueDate')?.errors?.required"
+                              jhiTranslate="entity.validation.required"
+                              >Required</small
+                            >
+                          </div>
+                        </div>
+                        <div>
+                          <label class="form-label" jhiTranslate="latestBusinessApp.invoice.dueDate" for="field_dueDate">Due Date</label>
+                          <div class="input-group">
+                            <input
+                              id="field_dueDate"
+                              data-cy="dueDate"
+                              type="text"
+                              class="form-control"
+                              name="dueDate"
+                              ngbDatepicker
+                              #dueDateDp="ngbDatepicker"
+                              formControlName="dueDate"
+                            />
+                            <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()">
+                              <fa-icon icon="calendar-alt"></fa-icon>
+                            </button>
+                          </div>
+                          <div
+                            *ngIf="editForm.get('dueDate')!.invalid && (editForm.get('dueDate')!.dirty || editForm.get('dueDate')!.touched)"
+                          >
+                            <small
+                              class="form-text text-danger"
+                              *ngIf="editForm.get('dueDate')?.errors?.required"
+                              jhiTranslate="entity.validation.required"
+                              >Required</small
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Row end -->
+              </div>
+              <div class="invoice-body">
+                <button type="button" class="btn btn-warning mb-2" (click)="addItem()" *ngIf="billingItems!.size <= 0">Add Items</button>
+                <button type="button" class="btn btn-warning mb-2" (click)="addItem()" *ngIf="billingItems!.size > 0">Edit Items</button>
+                <!-- Row start -->
+                <div class="row gutters" *ngIf="billingItems!.size > 0">
+                  <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="table-responsive">
+                      <table class="table custom-table m-0">
+                        <thead>
+                          <tr>
+                            <th>Items</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Unit</th>
+                            <th>Sub Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of billingItems">
+                            <td>
+                              {{ item.product?.name }}
+                              <p class="m-0 text-muted">
+                                {{ item.product?.description }}
+                              </p>
+                            </td>
+                            <td>{{ item.product?.sellingPrice }}</td>
+                            <td>
+                              <input
+                                type="number"
+                                [(ngModel)]="item.quantity"
+                                name="quantity"
+                                value="item.quantity"
+                                [ngModelOptions]="{ standalone: true }"
+                                (change)="onQuantityChange()"
+                              />
+                            </td>
+                            <td>{{ item.product?.unit }}</td>
+                            <td>{{ item.totalAmount }}</td>
+                          </tr>
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td colspan="2">
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <td>Subtotal</td>
+                                  </tr>
+                                  <tr>
+                                    <td *ngIf="includeDiscount">
+                                      Discount <button class="btn-close btn-sm" (click)="includeDiscount = false"></button>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td *ngIf="includeTax">Tax <button class="btn-close btn-sm" (click)="includeTax = false"></button></td>
+                                  </tr>
+                                  <tr>
+                                    <td *ngIf="includeShippingCharges">
+                                      Shipping &amp; Handling
+                                      <button class="btn-close btn-sm" (click)="includeShippingCharges = false"></button>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                              <h5 class="text-success"><strong>Grand Total</strong></h5>
+                              <br />
+                              <span *ngIf="!includeTax">
+                                <button class="btn btn-primary btn-sm mb-1" (click)="includeTax = true">Add Tax</button> </span
+                              ><br />
+                              <span *ngIf="!includeDiscount">
+                                <button class="btn btn-primary btn-sm mb-1" (click)="includeDiscount = true">Add Discount</button>
+                              </span>
+                              <span *ngIf="!includeShippingCharges">
+                                <button class="btn btn-primary btn-sm mb-1" (click)="includeShippingCharges = true">
+                                  Add Shipping &amp; Handling
+                                </button> </span
+                              ><br />
+                            </td>
+                            <td style="width: 20%">
+                              <table>
+                                <tbody>
+                                  <tr>
+                                    <td style="float: right; margin-right: 25%">
+                                      {{ this.editForm.get('subTotal')?.getRawValue() }}
+                                    </td>
+                                  </tr>
+                                  <tr *ngIf="includeDiscount">
+                                    <td *ngIf="includeDiscount" style="float: right; margin-right: 25%">
+                                      {{ '-' + this.editForm.get('discount')?.getRawValue() }}
+                                    </td>
+                                    <td>@</td>
+                                    <td>
+                                      <input
+                                        style="height: 24px; width: 68px"
+                                        type="number"
+                                        [(ngModel)]="extraFlieds!.discount"
+                                        name="discount"
+                                        value="extraFlieds?.discount"
+                                        [ngModelOptions]="{ standalone: true }"
+                                        (change)="onQuantityChange()"
+                                      />%
+                                    </td>
+                                  </tr>
+                                  <tr *ngIf="includeTax">
+                                    <td style="float: right; margin-right: 25%">
+                                      {{ this.editForm.get('tax')?.getRawValue() }}
+                                    </td>
+                                    <td>@</td>
+                                    <td>
+                                      <input
+                                        style="height: 24px; width: 68px"
+                                        type="number"
+                                        [(ngModel)]="extraFlieds!.tax"
+                                        name="tax"
+                                        value="extraFlieds?.tax"
+                                        [ngModelOptions]="{ standalone: true }"
+                                        (change)="onQuantityChange()"
+                                      />%
+                                    </td>
+                                  </tr>
+                                  <tr *ngIf="includeShippingCharges">
+                                    <td>
+                                      <input
+                                        style="height: 24px; width: 68px; text-align: end"
+                                        type="number"
+                                        [(ngModel)]="extraFlieds!.shippingCharges"
+                                        name="shippingCharges"
+                                        value="extraFlieds?.shippingCharges"
+                                        [ngModelOptions]="{ standalone: true }"
+                                        (change)="onQuantityChange()"
+                                      />
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td style="float: right">
+                                      <h5 class="text-success" style="float: right; margin-right: 25%">
+                                        <strong>&#8377;{{ editForm.get('totalAmount')?.getRawValue() }}</strong>
+                                      </h5>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <div class="form-check form-switch">
+                                      <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        [(ngModel)]="extraFlieds!.paid"
+                                        [ngModelOptions]="{ standalone: true }"
+                                        id="flexSwitchCheckDefault"
+                                      />
+                                      <label class="form-check-label" for="flexSwitchCheckDefault">Paid</label>
+                                    </div>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <!-- Row end -->
+              </div>
+              <div class="mt-3" style="float: right">
+                <button
+                  type="button"
+                  id="cancel-save"
+                  data-cy="entityCreateCancelButton"
+                  class="btn btn-secondary"
+                  (click)="previousState()"
+                >
+                  <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button
+                  type="submit"
+                  id="save-entity"
+                  data-cy="entityCreateSaveButton"
+                  [disabled]="editForm.invalid || isSaving"
+                  class="btn btn-primary"
+                >
+                  <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+              </div>
+              <div class="invoice-footer">Thank you for your Business.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

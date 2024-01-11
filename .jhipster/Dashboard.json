@@ -1,0 +1,19 @@
+{
+  "applications": "*",
+  "changelogDate": "20231124115049",
+  "entityTableName": "dashboard",
+  "fields": [
+    {
+      "fieldName": "totalSaleTillDate",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "totalProfitTillDate",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "Dashboard",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

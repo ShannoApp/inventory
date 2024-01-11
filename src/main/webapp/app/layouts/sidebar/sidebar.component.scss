@@ -1,0 +1,68 @@
+/* sidebar.component.css */
+.sidebar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #333;
+  padding: 20px;
+  color: #fff;
+  transition: width 0.3s ease;
+  margin-top: 59px;
+  z-index: 99;
+  transition: margin-left 0.3s;
+}
+
+.toggle-icon-after {
+  // height: 49px;
+  // width: 54px;
+}
+
+.toggle-icon {
+  height: 49px;
+  width: 54px;
+  margin-left: 20px;
+}
+
+.collapsed {
+  width: 60px; /* Adjust as needed */
+  display: none;
+}
+
+.toggle-button {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-top {
+  background-color: #333;
+  position: fixed;
+  margin-left: 250px;
+  width: 100%;
+}
+.nav-top-after {
+  background-color: #333;
+  position: fixed;
+  margin-left: 0px;
+  width: 100%;
+}

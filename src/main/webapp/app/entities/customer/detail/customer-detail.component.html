@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="customer">
+      <h2 data-cy="customerDetailsHeading">
+        <span jhiTranslate="latestBusinessApp.customer.detail.title">Customer Details</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <!-- <dt><span jhiTranslate="global.field.id">id</span></dt>
+        <dd>
+          <span>{{ customer.id }}</span>
+        </dd> -->
+        <dt>
+          <span jhiTranslate="latestBusinessApp.customer.firstName">FirstName</span>
+        </dt>
+        <dd>
+          <span>{{ customer.firstName }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.customer.lastName">LastName</span>
+        </dt>
+        <dd>
+          <span>{{ customer.lastName }}</span>
+        </dd>
+        <dt><span jhiTranslate="latestBusinessApp.customer.email">Email</span></dt>
+        <dd>
+          <span>{{ customer.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="latestBusinessApp.customer.phone">Phone</span></dt>
+        <dd>
+          <span>{{ customer.phone }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.customer.address">Address</span>
+        </dt>
+        <dd>
+          <span>{{ customer.address }}</span>
+        </dd>
+        <!-- <dt>
+          <span jhiTranslate="latestBusinessApp.customer.business">Business</span>
+        </dt> -->
+        <!-- <dd>
+          <div *ngIf="customer.business">
+            <a [routerLink]="['/business', customer.business.id, 'view']">{{ customer.business.id }}</a>
+          </div>
+        </dd> -->
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/customer', customer.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

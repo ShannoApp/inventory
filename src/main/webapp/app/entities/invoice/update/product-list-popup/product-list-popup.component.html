@@ -1,0 +1,32 @@
+<!-- The Modal -->
+<div *ngIf="open" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Recipient's username"
+        aria-label="Recipient's username"
+        aria-describedby="basic-addon2"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button">Button</button>
+      </div>
+    </div>
+    <button class="btn btn-primary mb-4" (click)="triggerEvent()">done</button>
+    <div *ngFor="let item of items; let i = index">
+      <div class="form-check card" (click)="selectProduct(i)" [ngClass]="{ 'bg-warning': item.iSelected }">
+        <label class="form-check-label" for="flexCheckDefault">
+          {{ item.item.name }}
+        </label>
+        <label class="form-check-label" for="flexCheckDefault">
+          {{ item.item.discription }}
+        </label>
+        <label class="form-check-label" for="flexCheckDefault">
+          {{ item.item.category }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

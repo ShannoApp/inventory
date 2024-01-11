@@ -1,0 +1,124 @@
+<!-- <div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="product?">
+      <h2 data-cy="product?DetailsHeading">
+        <span jhiTranslate="latestBusinessApp.product?.detail.title"
+          >{{product?.name}}</span
+        >
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">__jhiTransformTranslate__('global.field.id')</span></dt>
+        <dd>
+          <span>{{ product?.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="latestBusinessApp.product?.name">__jhiTransformTranslate__('latestBusinessApp.product?.name')</span></dt>
+        <dd>
+          <span>{{ product?.name }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.product?.description"
+            >__jhiTransformTranslate__('latestBusinessApp.product?.description')</span
+          >
+        </dt>
+        <dd>
+          <span>{{ product?.description }}</span>
+        </dd>
+        <dt><span jhiTranslate="latestBusinessApp.product?.price">__jhiTransformTranslate__('latestBusinessApp.product?.price')</span></dt>
+        <dd>
+          <span>{{ product?.sellingPrice }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.product?.quantity">__jhiTransformTranslate__('latestBusinessApp.product?.quantity')</span>
+        </dt>
+        <dd>
+          <span>{{ product?.openingQuantity }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.product?.business">__jhiTransformTranslate__('latestBusinessApp.product?.business')</span>
+        </dt>
+        <dd>
+          <div *ngIf="product?.business">
+            <a [routerLink]="['/business', product?.business.id, 'view']">{{ product?.business.id }}</a>
+          </div>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.product?.category">__jhiTransformTranslate__('latestBusinessApp.product?.category')</span>
+        </dt>
+        <dd>
+          <div *ngIf="product?.category">
+            <a [routerLink]="['/category', product?.category.id, 'view']">{{ product?.category.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"
+          >__jhiTransformTranslate__('entity.action.back')</span
+        >
+      </button>
+
+      <button type="button" [routerLink]="['/product?', product?.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"
+          >__jhiTransformTranslate__('entity.action.edit')</span
+        >
+      </button>
+    </div>
+  </div>
+</div> -->
+<div class="container mt-4">
+  <h2>Product Details</h2>
+  <hr />
+
+  <div class="row">
+    <div class="col-md-6">
+      <dl class="row">
+        <!-- <dt class="col-sm-4">ID:</dt>
+        <dd class="col-sm-8">{{ product?.id }}</dd> -->
+
+        <dt class="col-sm-4">Name:</dt>
+        <dd class="col-sm-8">{{ product?.name || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">Description:</dt>
+        <dd class="col-sm-8">{{ product?.description || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">Unit:</dt>
+        <dd class="col-sm-8">{{ product?.unit || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">Selling Price:</dt>
+        <dd class="col-sm-8">{{ product?.sellingPrice || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">Opening Quantity:</dt>
+        <dd class="col-sm-8">{{ product?.openingQuantity || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">Business ID:</dt>
+        <dd class="col-sm-8">{{ product?.business?.id || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">Category:</dt>
+        <dd class="col-sm-8">{{ product?.category?.name || 'N/A' }}</dd>
+      </dl>
+    </div>
+
+    <div class="col-md-6">
+      <dl class="row">
+        <dt class="col-sm-4">Purchase Price:</dt>
+        <dd class="col-sm-8">{{ product?.purchasePrice || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">As Of Date:</dt>
+        <dd class="col-sm-8">{{ product?.asOfDate || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">Min Stock To Maintain:</dt>
+        <dd class="col-sm-8">{{ product?.minStockToMaintain || 'N/A' }}</dd>
+
+        <dt class="col-sm-4">Location:</dt>
+        <dd class="col-sm-8">{{ product?.location || 'N/A' }}</dd>
+      </dl>
+    </div>
+  </div>
+</div>

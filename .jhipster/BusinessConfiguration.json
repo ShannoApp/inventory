@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20231124115049",
+  "entityTableName": "business_configuration",
+  "fields": [
+    {
+      "fieldName": "businessId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "discount",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "shippingCharges",
+      "fieldType": "Double"
+    },
+    {
+      "fieldName": "tax",
+      "fieldType": "Double"
+    }
+  ],
+  "name": "BusinessConfiguration",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

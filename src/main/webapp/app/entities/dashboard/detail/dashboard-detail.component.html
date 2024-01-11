@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="dashboard">
+      <h2 data-cy="dashboardDetailsHeading">
+        <span jhiTranslate="latestBusinessApp.dashboard.detail.title"
+          >__jhiTransformTranslate__('latestBusinessApp.dashboard.detail.title')</span
+        >
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">__jhiTransformTranslate__('global.field.id')</span></dt>
+        <dd>
+          <span>{{ dashboard.id }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.dashboard.totalSaleTillDate"
+            >__jhiTransformTranslate__('latestBusinessApp.dashboard.totalSaleTillDate')</span
+          >
+        </dt>
+        <dd>
+          <span>{{ dashboard.totalSaleTillDate }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.dashboard.totalProfitTillDate"
+            >__jhiTransformTranslate__('latestBusinessApp.dashboard.totalProfitTillDate')</span
+          >
+        </dt>
+        <dd>
+          <span>{{ dashboard.totalProfitTillDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"
+          >__jhiTransformTranslate__('entity.action.back')</span
+        >
+      </button>
+
+      <button type="button" [routerLink]="['/dashboard', dashboard.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"
+          >__jhiTransformTranslate__('entity.action.edit')</span
+        >
+      </button>
+    </div>
+  </div>
+</div>

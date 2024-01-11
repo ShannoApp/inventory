@@ -1,0 +1,84 @@
+entity Business {
+  name String required minlength(2)
+  website String
+  email String
+  phone String
+}
+
+entity Customer {
+  firstName String required minlength(2)
+  lastName String required minlength(2)
+  email String required 
+  phone String
+  address TextBlob
+}
+
+entity Invoice {
+  invoiceNumber String required minlength(4)
+  issueDate LocalDate required
+  dueDate LocalDate required
+  totalAmount Double min(0) required
+}
+
+@embedded
+entity BillingItem {
+  description String required minlength(2)
+  quantity Integer min(1) required
+  unitPrice Double min(0) required
+  totalAmount Double min(0) required
+}
+
+entity Category {
+  name String required minlength(2)
+  description TextBlob
+}
+
+entity Product {
+  name String required minlength(2)
+  description TextBlob
+  price Double min(0) required
+  quantity Integer min(0) required
+}
+
+relationship OneToMany {
+  Business to Customer
+}
+
+relationship OneToMany {
+  Business to Product
+}
+
+relationship OneToOne {
+  Invoice to Customer
+}
+
+relationship OneToOne {
+  BillingItem to Product
+}
+
+relationship OneToMany {
+  Category to Product 
+}
+
+relationship OneToMany {
+  Business to Category
+}
+
+relationship OneToMany {
+  Business to Invoice
+}
+
+relationship OneToMany {
+  Invoice to BillingItem
+}
+
+
+paginate Invoice, Customer, Product with infinite-scroll
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

@@ -1,0 +1,101 @@
+<!-- <div class="d-flex justify-content-center" id="business-detail">
+  <div class="col-8">
+    <div *ngIf="business">
+      <h2 data-cy="businessDetailsHeading">
+        <span jhiTranslate="latestBusinessApp.business.detail.title"
+          >__jhiTransformTranslate__('latestBusinessApp.business.detail.title')</span
+        >
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">__jhiTransformTranslate__('global.field.id')</span></dt>
+        <dd>
+          <span>{{ business.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="latestBusinessApp.business.name">__jhiTransformTranslate__('latestBusinessApp.business.name')</span></dt>
+        <dd>
+          <span>{{ business.name }}</span>
+        </dd>
+        <dt>
+          <span jhiTranslate="latestBusinessApp.business.website">__jhiTransformTranslate__('latestBusinessApp.business.website')</span>
+        </dt>
+        <dd>
+          <span>{{ business.website }}</span>
+        </dd>
+        <dt><span jhiTranslate="latestBusinessApp.business.email">__jhiTransformTranslate__('latestBusinessApp.business.email')</span></dt>
+        <dd>
+          <span>{{ business.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="latestBusinessApp.business.phone">__jhiTransformTranslate__('latestBusinessApp.business.phone')</span></dt>
+        <dd>
+          <span>{{ business.phone }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"
+          >__jhiTransformTranslate__('entity.action.back')</span
+        >
+      </button>
+
+      <button type="button" [routerLink]="['/business', business.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"
+          >__jhiTransformTranslate__('entity.action.edit')</span
+        >
+      </button>
+    </div>
+  </div>
+</div> -->
+
+<div class="d-flex justify-content-center" id="business-detail">
+  <div class="col-8" *ngIf="business">
+    <h2 data-cy="businessDetailsHeading">
+      <span jhiTranslate="latestBusinessApp.business.detail.title">Business Details</span>
+    </h2>
+
+    <hr />
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <dl class="row-md jh-entity-details">
+      <!-- <dt><span jhiTranslate="latestBusinessApp.business.id">Id</span></dt>
+      <dd><span>{{ business.id }}</span></dd> -->
+
+      <dt><span jhiTranslate="latestBusinessApp.business.name">Name</span></dt>
+      <dd>
+        <span>{{ business.name }}</span>
+      </dd>
+
+      <dt><span jhiTranslate="latestBusinessApp.business.website">Website</span></dt>
+      <dd>
+        <span>{{ business.website }}</span>
+      </dd>
+
+      <dt><span jhiTranslate="latestBusinessApp.business.email">Email</span></dt>
+      <dd>
+        <span>{{ business.email }}</span>
+      </dd>
+
+      <dt><span jhiTranslate="latestBusinessApp.business.phone">Phone</span></dt>
+      <dd>
+        <span>{{ business.phone }}</span>
+      </dd>
+    </dl>
+
+    <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+      <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+    </button>
+
+    <button type="button" [routerLink]="['/business', business.id, 'edit']" class="btn btn-primary">
+      <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+    </button>
+  </div>
+</div>
