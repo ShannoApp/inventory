@@ -207,27 +207,35 @@ export class InvoiceService {
     });
   }
 
-  calculatePendingAndPaidAmount(invoices: IInvoice[]): {
-    pendingAmount: number;
-    paidAmount: number;
-    pendingInvoices: number;
-    paidInvoices: number;
-  } {
-    let pendingAmount = 0;
-    let paidAmount = 0;
-    let pendingInvoices = 0;
-    let paidInvoices = 0;
+  calculatePendingAndPaidAmount(invoices: IInvoice[]): InvoiceSummary {
+    return invoices.reduce(
+      (summary, invoice) => {
+        const { paid, totalAmount } = invoice;
+        const amount = totalAmount ?? 0;
 
-    invoices.forEach(invoice => {
-      if (invoice.paid) {
-        paidAmount = paidAmount + invoice?.totalAmount! ?? 0;
-        paidInvoices++;
-      } else {
-        pendingAmount = pendingAmount + invoice?.totalAmount! ?? 0;
-        pendingInvoices++;
-      }
-    });
+        if (paid) {
+          summary.paidAmount += amount;
+          summary.paidInvoices++;
+        } else {
+          summary.pendingAmount += amount;
+          summary.pendingInvoices++;
+        }
 
-    return { pendingAmount, paidAmount, pendingInvoices, paidInvoices };
+        return summary;
+      },
+      {
+        pendingAmount: 0,
+        paidAmount: 0,
+        pendingInvoices: 0,
+        paidInvoices: 0,
+      },
+    );
   }
+}
+
+interface InvoiceSummary {
+  pendingAmount: number;
+  paidAmount: number;
+  pendingInvoices: number;
+  paidInvoices: number;
 }

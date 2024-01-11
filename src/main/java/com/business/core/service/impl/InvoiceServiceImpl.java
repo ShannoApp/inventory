@@ -124,7 +124,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public Optional<List<Invoice>> findByCustomerOrderByIssueDateDesc(Customer customer, String businessId) {
+    public List<Invoice> findByCustomerOrderByIssueDateDesc(Customer customer, String businessId) {
         log.debug("Request to get all Invoices By Customer");
         return invoiceRepository.findByCustomerIdAndBusinessId(customer, businessId);
     }

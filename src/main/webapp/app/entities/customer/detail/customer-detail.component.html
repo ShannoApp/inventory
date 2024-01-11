@@ -33,13 +33,13 @@
       <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center mb-4">
           <div>
-            <h2 data-cy="customerDetailsHeading">{{ customer?.firstName + ' ' + customer?.lastName }}</h2>
+            <h2 data-cy="customerDetailsHeading">Customer Name: {{ customer!.firstName + ' ' + customer!.lastName }}</h2>
           </div>
           <div>
             <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
               <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"></span>
             </button>
-            <button type="button" [routerLink]="['/customer', customer?.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/customer', customer!.id, 'edit']" class="btn btn-primary">
               <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
           </div>
@@ -59,7 +59,7 @@
                       <strong class="margin-10px-left text-green">Address:</strong>
                     </div>
                     <div class="col-md-7 col-7">
-                      <p>{{ customer?.address }}</p>
+                      <p>{{ customer!.address }}</p>
                     </div>
                   </div>
                 </li>
@@ -70,7 +70,7 @@
                       <strong class="margin-10px-left xs-margin-four-left text-purple">Phone:</strong>
                     </div>
                     <div class="col-md-7 col-7">
-                      <p>{{ customer?.phone }}</p>
+                      <p>{{ customer!.phone }}</p>
                     </div>
                   </div>
                 </li>
@@ -82,7 +82,7 @@
                     </div>
                     <div class="col-md-7 col-7">
                       <p>
-                        <a href="javascript:void(0)">{{ customer?.email }}</a>
+                        <a href="javascript:void(0)">{{ customer!.email }}</a>
                       </p>
                     </div>
                   </div>

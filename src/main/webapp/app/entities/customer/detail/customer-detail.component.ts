@@ -34,7 +34,6 @@ export class CustomerDetailComponent implements OnInit {
         this.invoices = res.body;
         this.balances = this.invoiceService.calculatePendingAndPaidAmount(this.invoices);
         this.isLoading = false;
-        console.log(this.balances);
       }
     });
   }

@@ -159,11 +159,8 @@ public class InvoiceResource {
     public ResponseEntity<List<Invoice>> getAllInvoicesByCustomer(@PathVariable String businessId, @PathVariable String customerId) {
         log.debug("REST request to get a page of Invoices");
         Customer cus = new Customer().id(customerId);
-        Optional<List<Invoice>> invoices = invoiceService.findByCustomerOrderByIssueDateDesc(cus, businessId);
-        return ResponseEntity
-            .ok()
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, ""))
-            .body(invoices.get());
+        List<Invoice> invoices = invoiceService.findByCustomerOrderByIssueDateDesc(cus, businessId);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, "")).body(invoices);
     }
 
     /**

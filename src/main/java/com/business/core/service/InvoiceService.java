@@ -58,5 +58,5 @@ public interface InvoiceService {
      */
     void delete(String id);
 
-    Optional<List<Invoice>> findByCustomerOrderByIssueDateDesc(Customer customer, String businessId);
+    List<Invoice> findByCustomerOrderByIssueDateDesc(Customer customer, String businessId);
 }

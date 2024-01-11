@@ -20,5 +20,5 @@ public interface InvoiceRepository extends MongoRepository<Invoice, String> {
 
     Optional<Invoice> findFirstByOrderByIssueDateDesc();
 
-    Optional<List<Invoice>> findByCustomerIdAndBusinessId(Customer customer, String businessId);
+    List<Invoice> findByCustomerIdAndBusinessId(Customer customer, String businessId);
 }

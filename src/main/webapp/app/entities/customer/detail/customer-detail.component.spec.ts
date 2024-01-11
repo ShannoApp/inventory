@@ -6,13 +6,14 @@ import { of } from 'rxjs';
 import { DataUtils } from 'app/core/util/data-util.service';
 
 import { CustomerDetailComponent } from './customer-detail.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('Customer Management Detail Component', () => {
   let dataUtils: DataUtils;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomerDetailComponent, RouterTestingModule.withRoutes([], { bindToComponentInputs: true })],
+      imports: [HttpClientTestingModule, CustomerDetailComponent, RouterTestingModule.withRoutes([], { bindToComponentInputs: true })],
       providers: [
         provideRouter(
           [
